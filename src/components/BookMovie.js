@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function BookMovie(props) {
 
@@ -134,14 +136,15 @@ export default function BookMovie(props) {
                 await axios.post(`${props.serverUrl}/api/booking`, summaryBooking)
                 resetData()
                 setToggle(toggle === 0 ? 1 : 0)
+                toast.success(`Booked movie: ${summaryBooking.movieName}`)
 
             } else {
-                alert("fill it properly")
+                toast.error("Please fill properly 😒")
             }
 
         } catch (err) {
 
-            console.log(err)
+            toast.error("Some error happened ☹️")
 
         }
     };
@@ -161,7 +164,7 @@ export default function BookMovie(props) {
 
         } catch (err) {
 
-            console.log(err)
+            toast.error("Can't fetch data 😣")
 
         }
 
@@ -194,7 +197,7 @@ export default function BookMovie(props) {
     const formatDateToDdMmYy = (date) => {
         let newDate = date.slice(0, 10)
         return newDate
-      }
+    }
 
 
     return (
@@ -255,7 +258,7 @@ export default function BookMovie(props) {
             <div>
                 {
                     showLastBooking ? (
-                        <div  className="previous-record">
+                        <div className="previous-record">
 
                             <h3>Last Booking Status : </h3>
                             {
@@ -270,12 +273,12 @@ export default function BookMovie(props) {
                                             <p>D1: {elem.D1}</p>
                                             <p>D2: {elem.D2}</p>
                                         </div>
-                                        <div style={{marginBottom: "1vw"}}> <span style={{ fontWeight: "bold" }}>MovieName:</span> {elem.movieName}</div>
-                                        <div style={{marginBottom: "1vw"}}> <span style={{ fontWeight: "bold"}}>Timing:</span> {elem.timing}</div>
-                                        <div style={{marginBottom: "1vw"}}> <span style={{ fontWeight: "bold" }}>Date:</span> {
+                                        <div style={{ marginBottom: "1vw" }}> <span style={{ fontWeight: "bold" }}>MovieName:</span> {elem.movieName}</div>
+                                        <div style={{ marginBottom: "1vw" }}> <span style={{ fontWeight: "bold" }}>Timing:</span> {elem.timing}</div>
+                                        <div style={{ marginBottom: "1vw" }}> <span style={{ fontWeight: "bold" }}>Date:</span> {
                                             formatDateToDdMmYy(elem.date)
                                         }</div>
-                                        <div style={{marginBottom: "1vw"}}> <span style={{ fontWeight: "bold" }}>Time Of Booking:</span> {elem.timeOfBooking}</div>
+                                        <div style={{ marginBottom: "1vw" }}> <span style={{ fontWeight: "bold" }}>Time Of Booking:</span> {elem.timeOfBooking}</div>
 
                                     </div>
                                 })
@@ -287,6 +290,18 @@ export default function BookMovie(props) {
                     ) : (<h3>No Record Found</h3>)
                 }
             </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     )
 }
