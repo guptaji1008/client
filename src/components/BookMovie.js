@@ -275,9 +275,7 @@ export default function BookMovie(props) {
                                         <div style={{marginBottom: "1vw"}}> <span style={{ fontWeight: "bold" }}>Date:</span> {
                                             formatDateToDdMmYy(elem.date)
                                         }</div>
-                                        <div style={{marginBottom: "1vw"}}> <span style={{ fontWeight: "bold" }}>Time Of Booking:</span> {
-                                            elem.timeOfBooking
-                                        }</div>
+                                        <div style={{marginBottom: "1vw"}}> <span style={{ fontWeight: "bold" }}>Time Of Booking:</span> {elem.timeOfBooking}</div>
 
                                     </div>
                                 })
