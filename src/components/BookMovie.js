@@ -52,7 +52,7 @@ export default function BookMovie(props) {
         D2: 0,
         movieName: "",
         timing: "",
-        timeOfBooking: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+        timeOfBooking: ""
     })
 
     const [toggle, setToggle] = useState(0)
@@ -125,7 +125,8 @@ export default function BookMovie(props) {
         setSummaryBooking(summaryBooking => ({
             ...summaryBooking,
             movieName: "",
-            timing: ""
+            timing: "",
+            timeOfBooking: ""
         })
         )
 
@@ -140,6 +141,7 @@ export default function BookMovie(props) {
                 (summaryBooking.A1 !== 0 || summaryBooking.A2 !== 0 || summaryBooking.A3 !== 0 || summaryBooking.A4 !== 0 || summaryBooking.D1 !== 0 || summaryBooking.D2 !== 0)
             ) {
 
+                setSummaryBooking(summaryBooking => ({...summaryBooking, timeOfBooking: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`}))
                 await axios.post(`${props.serverUrl}/api/booking`, summaryBooking)
                 setToggle(toggle === 0 ? 1 : 0)
                 toast.success(`Booked movie: ${summaryBooking.movieName}`)
