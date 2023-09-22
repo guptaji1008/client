@@ -138,7 +138,11 @@ export default function BookMovie(props) {
 
             if (summaryBooking.movieName !== "" &&
                 summaryBooking.timing !== "" &&
-                (summaryBooking.A1 !== 0 || summaryBooking.A2 !== 0 || summaryBooking.A3 !== 0 || summaryBooking.A4 !== 0 || summaryBooking.D1 !== 0 || summaryBooking.D2 !== 0)
+                (summaryBooking.A1 >= 0 && summaryBooking.A2 >= 0 && summaryBooking.A3 >= 0 && summaryBooking.A4 >= 0 && summaryBooking.D1 >= 0 && summaryBooking.D2 >= 0  &&
+                    (summaryBooking.A1+summaryBooking.A2+summaryBooking.A3+summaryBooking.A4+summaryBooking.D1+summaryBooking.D2) > 0
+                    ) && (
+                    seatA1 >= 0 && seatA2 >= 0 && seatA3 >= 0 && seatA4 >= 0 && seatD1 >= 0 && seatD2 > 0 && (seatA1+seatA2+seatA3+seatA4+seatD1+seatD2) > 0
+                )
             ) {
 
                 await axios.post(`${props.serverUrl}/api/booking`, summaryBooking)
