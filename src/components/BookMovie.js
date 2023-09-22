@@ -51,8 +51,7 @@ export default function BookMovie(props) {
         D1: 0,
         D2: 0,
         movieName: "",
-        timing: "",
-        timeOfBooking: ""
+        timing: ""
     })
 
     const [toggle, setToggle] = useState(0)
@@ -125,15 +124,16 @@ export default function BookMovie(props) {
         setSummaryBooking(summaryBooking => ({
             ...summaryBooking,
             movieName: "",
-            timing: "",
-            timeOfBooking: ""
+            timing: ""
         })
         )
 
     }
+    
 
     // Defining a function which is called when submit button is clicked, basically it is sending data to server and by there it get saved in database :-
     const handleBookClick = async () => {
+
         try {
 
             if (summaryBooking.movieName !== "" &&
@@ -141,7 +141,6 @@ export default function BookMovie(props) {
                 (summaryBooking.A1 !== 0 || summaryBooking.A2 !== 0 || summaryBooking.A3 !== 0 || summaryBooking.A4 !== 0 || summaryBooking.D1 !== 0 || summaryBooking.D2 !== 0)
             ) {
 
-                setSummaryBooking(summaryBooking => ({...summaryBooking, timeOfBooking: `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`}))
                 await axios.post(`${props.serverUrl}/api/booking`, summaryBooking)
                 setToggle(toggle === 0 ? 1 : 0)
                 toast.success(`Booked movie: ${summaryBooking.movieName}`)
@@ -287,7 +286,6 @@ export default function BookMovie(props) {
                                         <div style={{ marginBottom: "1vw" }}> <span style={{ fontWeight: "bold" }}>Date:</span> {
                                             formatDateToDdMmYy(elem.date)
                                         }</div>
-                                        <div style={{ marginBottom: "1vw" }}> <span style={{ fontWeight: "bold" }}>Time Of Booking:</span> {elem.timeOfBooking}</div>
 
                                     </div>
                                 })
