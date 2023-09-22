@@ -122,6 +122,13 @@ export default function BookMovie(props) {
 
         setSeatA1(0); setSeatA2(0); setSeatA3(0); setSeatA4(0); setSeatD1(0); setSeatD2(0)
 
+        setSummaryBooking(summaryBooking => ({
+            ...summaryBooking,
+            movieName: "",
+            timing: ""
+        })
+        )
+
     }
 
     // Defining a function which is called when submit button is clicked, basically it is sending data to server and by there it get saved in database :-
@@ -134,9 +141,9 @@ export default function BookMovie(props) {
             ) {
 
                 await axios.post(`${props.serverUrl}/api/booking`, summaryBooking)
-                resetData()
                 setToggle(toggle === 0 ? 1 : 0)
                 toast.success(`Booked movie: ${summaryBooking.movieName}`)
+                resetData()
 
             } else {
                 toast.error("Please fill properly 😒")
